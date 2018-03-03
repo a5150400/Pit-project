@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图片滚屏效果 - www.miaov.com - 妙味课堂</title>
+<link href="miaov_style.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+<div class="control">
+	<label id="chk_pause"><input type="checkbox" checked="checked">间隔停顿</label>
+	<select id="pause_time">
+		<option value="100">短</option>
+		<option value="1000" selected="selected">中</option>
+		<option value="3000">长</option>
+	</select>
+
+	滚动速度：
+	<select id="sel_speed">
+		<option value="2">慢</option>
+		<option value="5">中</option>
+		<option value="10">快</option>
+	</select>
+</div>
+
+<div class="roll" id="roll">
+    <a href="javascript:void(0);" class="btn_left"></a>
+    <a href="javascript:void(0);" class="btn_right"></a>
+    <div class="wrap">
+        <ul>
+            <li><a href="http://www.miaov.com/"><img src="images/1.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="images/2.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="images/3.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="images/4.jpg" /></a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+var ispeed =  5;
+var uLi= document.getElementById('roll').getElementsByTagName('ul')[0];
+var ali = document.getElementsByTagName('li');
+var butn = document.getElementsByTagName('a');
+str = uLi.innerHTML+ uLi.innerHTML;
+uLi.innerHTML =  str;
+uLi.style.width = ali.length * ali[0].offsetWidth+"px";
+
+var timer ;
+	timer= setInterval(function() {
+	uLi.style.left=uLi.offsetLeft+ispeed+"px";
+
+	if (uLi.offsetLeft<-uLi.offsetWidth/2) {
+		uLi.style.left="0px";
+	}else if(uLi.offsetLeft>0) {
+
+
+				uLi.style.left = -uLi.offsetWidth/2;
+	}
+},30)
+
+butn[0].addEventListener("mouseover",function() {
+	 					ispeed = -5;
+
+})
+butn[1].addEventListener("mouseover",function() {
+				 ispeed = 5;
+
+})
+
+uLi.addEventListener("mouseover",function() {
+
+	clearInterval(timer)
+
+
+})
+uLi.addEventListener("mouseout",function() {
+
+	timer = setInterval(function() {
+		uLi.style.left=uLi.offsetLeft+ispeed+"px";
+
+		if (uLi.offsetLeft<-uLi.offsetWidth/2) {
+			uLi.style.left="0px";
+		}else if(uLi.offsetLeft>0) {
+
+
+					uLi.style.left = -uLi.offsetWidth/2;
+		}
+	},30)
+
+   
+
+})
+
+
+</script>
+</body>
+</html>
