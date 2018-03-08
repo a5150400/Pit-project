@@ -15,10 +15,9 @@
 }
   </style>
   <body>
+<H1>点击拖拽,松开弹跳+重力。</H1>
+<div id="div1"class="">
 
-
-<div id="div1"class="">q
-	点我拖拽
 </div>
 
 
@@ -60,6 +59,7 @@
       startMove();
     }
         clearInterval(timer);
+        return false;
     }
 
     var timer = null;
