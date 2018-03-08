@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+#div1{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+  </style>
+  <body>
+
+<div id="div1"class="">
+
+</div>
+
+
+
+    <script src="./kuangjia\运动框架.js"></script>
+    <script type="text/javascript">
+
+    var lastspeedX = 0;
+    var lastspeedY = 0;
+    var div1 = document.getElementById('div1');
+    div1.onmousedown  = function (ev) {
+        disX = ev.clientX - div1.offsetLeft;
+        disY = ev.clientY - div1.offsetTop;
+
+    document.onmousemove = function(ev) {
+        var l = ev.clientX - disX;
+        var y = ev.clientY - disY;
+        if (l<0) {
+           l = 0;
+        }else if (l>document.documentElement.clientWidth-div1.offsetWidth) {
+          l=document.documentElement.clientWidth-div1.offsetWidth;
+        }
+        if (y<0) {
+           y = 0;
+        }else if (y>document.documentElement.clientHeight-div1.offsetHeight) {
+          y=document.documentElement.clientHeight-div1.offsetHeight;
+        }
+
+        div1.style.left = l+'px';
+        div1.style.top = y+'px';
+        ispeedX =  l - lastspeedX;
+        ispeedY =  y - lastspeedY;
+        lastspeedX = l;
+        lastspeedY = y;
+    }
+    document.onmouseup = function() {
+      document.onmousemove= null;
+      document.onmouseup  = null;
+      startMove();
+    }
+        clearInterval(timer);
+    }
+
+    var timer = null;
+    var ispeedX = 0;
+    var ispeedY = 0;
+    function startMove() {
+    clearInterval(timer);
+
+      timer = setInterval(function() {
+
+          ispeedY+=3;
+
+          var l = div1.offsetLeft+ispeedX;
+          var t = div1.offsetTop+ispeedY;
+
+
+         if (t>=document.documentElement.clientHeight - div1.offsetHeight) {
+                ispeedY *= -0.8;
+                ispeedX *= 0.8;
+                t=document.documentElement.clientHeight - div1.offsetHeight;
+
+         }else if (t<=0) {
+
+              ispeedY*=-1;
+         			ispeedX*=0.8;
+         			t=0;
+
+         }
+
+         if (l>=document.documentElement.clientWidth - div1.offsetWidth) {
+                ispeedX *= -0.8
+                l = document.documentElement.clientWidth - div1.offsetWidth;
+         }else if (l<=0) {
+                ispeedX *= -0.8
+                l= 0;
+         }
+         if (Math.abs(ispeedX)<1) {
+             ispeedX = 0;
+         }
+         if (Math.abs(ispeedY)<1) {
+           ispeedY = 0;
+         }
+
+         if (ispeedX==0&&ispeedY == 0 && t==document.documentElement.clientHeight - div1.offsetHeight) {
+
+         }else {
+           div1.style.top =t+'px';
+           div1.style.left = l+'px';
+         }
+
+
+      },30)
+
+
+    }
+
+    </script>
+  </body>
+</html>
